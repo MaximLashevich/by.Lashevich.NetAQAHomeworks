@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework1Task2", "Homework1Task2\Homework1Task2.csproj", "{E65F47BC-0B8F-4505-A834-9503A6AE4C82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework1Task1", "..\Homework1Task1\by.Lashevich.NetAutomationHomeworks\Homework1Task1.csproj", "{28E38A97-5B1B-44B5-A6EC-53BE81FEFADD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E65F47BC-0B8F-4505-A834-9503A6AE4C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E65F47BC-0B8F-4505-A834-9503A6AE4C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E65F47BC-0B8F-4505-A834-9503A6AE4C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E65F47BC-0B8F-4505-A834-9503A6AE4C82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E38A97-5B1B-44B5-A6EC-53BE81FEFADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E38A97-5B1B-44B5-A6EC-53BE81FEFADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E38A97-5B1B-44B5-A6EC-53BE81FEFADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E38A97-5B1B-44B5-A6EC-53BE81FEFADD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {166CE22B-3683-4E03-A0A5-1220DDD6FB56}
+	EndGlobalSection
+EndGlobal
