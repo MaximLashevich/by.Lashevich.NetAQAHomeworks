@@ -74,17 +74,58 @@ namespace Homework2
 {
     public class Program
     {
-        
+        private static Bug bug;
+
         public static void Main(string[] args) 
         {
+            Dictionary<Guid, TestCase> testCaseCollection = new Dictionary<Guid, TestCase>();
+            Dictionary<Guid, Bug> bugCollection = new Dictionary<Guid, Bug>();
+
             ArrayList stepList = Step.FillStepsCollection();
             Step.ShowSteps(stepList);
 
             TestCase testCase = TestCase.FillTestCase();
             TestCase.ShowTestCase(testCase);
 
-            Bug bug = Bug.FillBug(testCase);
-            Bug.ShowBug(bug);
+            int createBug;
+            do
+            {
+                Console.Write("Do you want to create a Bug on a basis of created Test case?. \nType 1 for Yes, type 2 for No: ");
+                createBug = int.Parse(Console.ReadLine());
+            } while (createBug != 1 && createBug != 2);
+
+            if (createBug == 1) 
+            {
+                bug = Bug.FillBug(testCase);
+                Bug.ShowBug(bug);
+            }
+            
+
+            int successSave;
+            do
+            {
+                Console.Write("Do you want to save previously created items? \nType 1 for Yes, type 2 for No: ");
+                successSave = int.Parse(Console.ReadLine());
+            } while (successSave != 1 && successSave != 2);
+
+            switch (successSave)
+            {
+                case 1:
+                    if (createBug == 1)
+                    {
+                        testCaseCollection.Add(testCase.Id, testCase);
+                        bugCollection.Add(bug.Id, bug);
+                    }
+                    else 
+                    {
+                        testCaseCollection.Add(testCase.Id, testCase);
+                    }
+                    Console.Write("All items successfully saved. Program is over.");
+                    break;
+                case 2:
+                    Console.Write("Program is over.");
+                    break;
+            }
         }
     }
 }

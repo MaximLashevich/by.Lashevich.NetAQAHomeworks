@@ -10,9 +10,9 @@ namespace Homework2
 
         public Step(int stepNumber, string stepAction, string stepExpectedResult)
         {
-            Number = stepNumber;
-            Action = stepAction;
-            ExpectedResult = stepExpectedResult;
+            this.Number = stepNumber;
+            this.Action = stepAction;
+            this.ExpectedResult = stepExpectedResult;
         }
 
         public static ArrayList FillStepsCollection()
