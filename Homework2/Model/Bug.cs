@@ -1,21 +1,7 @@
 ﻿namespace Homework2
 {
-    public class Bug
+    public class Bug : Issue
     {
-        private Guid id;
-        public Guid Id { get => id; }
-
-        private DateTimeOffset creationDate;
-        public DateTimeOffset CreationDate { get => creationDate; }
-
-        public EnumPriority.Priority EnumPriority { get; set; }
-
-        public string Summary { get; set; }
-
-        public string? Precondition { get; set; }
-
-        public EnumStatus.Status EnumStatus { get; set; }
-
         public Guid TestCaseId { get; set; }
 
         public int StepNumber { get; set; }
@@ -25,18 +11,13 @@
         public string ExpectedResult { get; set; }
 
         public Bug(Guid id, DateTimeOffset creationDate, EnumPriority.Priority enumPriority, string summary, string? precondition, 
-            EnumStatus.Status enumStatus, Guid testCaseId, int stepNumber, string actualResult, string expectedResult) 
+            EnumStatus.Status enumStatus, Guid testCaseId, int stepNumber, string actualResult, string expectedResult)
+            : base(id, creationDate, enumPriority, summary, precondition, enumStatus)
         {
-            this.id = id;
-            this.creationDate = creationDate;
-            EnumPriority = enumPriority;
-            Summary = summary;
-            Precondition = precondition;
-            EnumStatus = enumStatus;
-            TestCaseId = testCaseId;
-            StepNumber = stepNumber;
-            ActualResult = actualResult;
-            ExpectedResult = expectedResult;
+            this.TestCaseId = testCaseId;
+            this.StepNumber = stepNumber;
+            this.ActualResult = actualResult;
+            this.ExpectedResult = expectedResult;
         }
 
         public static Bug FillBug(TestCase testCase)
@@ -87,7 +68,7 @@
                 actualResult = Console.ReadLine();
             } while (string.IsNullOrEmpty(actualResult) || string.IsNullOrWhiteSpace(actualResult));
             
-            string bugExpectedResult = Step.ShowExpectedResult(testCase.StepsList, stepNumber);
+            string bugExpectedResult = Step.ShowExpectedResult(testCase.StepsList, (stepNumber - 1));
             
             Bug bug = new Bug(bugId, bugCreationDate, bugEnumPriority, bugSummary, bugPrecondition, bugEnumStatus, bugTestCaseId,
                 stepNumber, actualResult, bugExpectedResult);
