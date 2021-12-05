@@ -15,7 +15,7 @@ namespace Homework2
             ExpectedResult = stepExpectedResult;
         }
 
-        public ArrayList FillStepsCollection()
+        public static ArrayList FillStepsCollection()
         {
             ArrayList stepsList = new ArrayList();
             int moveOn;
@@ -45,19 +45,28 @@ namespace Homework2
 
                 Step step = new Step(stepNumber, stepAction, stepExpectedResult);
 
+                //перед добавлением стэпа в коллекцию добавить проверку номера стэпа на уникальность
                 stepsList.Add(step);
 
-                Console.WriteLine("Step is successfully crested. \nType \"1\" to start entering new step or type \"2\" to stop input");
+                Console.WriteLine("Step is successfully created. \nType 1 to start entering new step or type 2 to stop input");
                 moveOn = int.Parse(Console.ReadLine());
             } while (moveOn == 1);
             return stepsList;
         }
-        public void ShowSteps(ArrayList stepsList)
+       
+        public static void ShowSteps(ArrayList stepsList)
         {
             foreach (Step step in stepsList)
             {
-                Console.WriteLine($"Step number: {step.Number}\nAction: {step.Action}\nExpected Result: {step.ExpectedResult}");
+                Console.WriteLine($"Step number: {step.Number}\nAction: {step.Action}\nExpected Result: {step.ExpectedResult}\n\n");
             }
         }
+        
+        public static string ShowExpectedResult(ArrayList stepsList, int i)
+        {
+            Step foundStep = (Step)stepsList[i];
+            return foundStep.ExpectedResult;
+        }
+            
     }
 }
