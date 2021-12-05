@@ -10,19 +10,19 @@ b.      CreationDate - заполняется автоматически;
 
 c.      Priority - заполняется пользователем; (тип Priority)
 
-d.      Summary - заполняется автоматически из класса тест-кейс;
+d.      Summary - заполняется пользователем;
 
-e.      Precondition - заполняется автоматически из класса тест-кейс;
+e.      Precondition - заполняется автоматически из объекта тест-кейс;
 
 f.       Status;  (тип Status)
 
-g.      TestCaseId - заполняется пользователем;
+g.      TestCaseId - заполняется автоматически из объекта тест-кейс;
 
-h.      StepNumber - заполняется автоматически из класса Step;
+h.      StepNumber - заполняется пользователем;
 
 i.       ActualResult - заполняется пользователем;
 
-j.       ExpectedResult - заполняется автоматически из класса Step.
+j.       ExpectedResult - заполняется автоматически из объекта тест-кейс и номера стэпа;
 
 
 
@@ -58,4 +58,33 @@ g.      Коллекции Step.
 
 a.      Каждый ввод с консли должен проверяться на валидность и если не проходит, то предлагать выполнить это действие снова.
 
-6.      Вынести классы и перечисления(enum) в отдельные файлы.(желательно в папку)*/
+6.      Вынести классы и перечисления(enum) в отдельные файлы.(желательно в папку)
+
+
+7.      * В Program.cs создать коллекции Bugs и TestCases
+
+8.      * В Switch меню реализовать добавление и удаление в коллекции Bugs и TestCase
+
+9.      * Создать абстрактный класс, содержащий общие свойства и методы, унаследовать от него Bug и TestCase.
+
+*/
+using System.Collections;
+
+namespace Homework2
+{
+    public class Program
+    {
+        
+        public static void Main(string[] args) 
+        {
+            ArrayList stepList = Step.FillStepsCollection();
+            Step.ShowSteps(stepList);
+
+            TestCase testCase = TestCase.FillTestCase();
+            TestCase.ShowTestCase(testCase);
+
+            Bug bug = Bug.FillBug(testCase);
+            Bug.ShowBug(bug);
+        }
+    }
+}
