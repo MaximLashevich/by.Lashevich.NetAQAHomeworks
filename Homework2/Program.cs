@@ -1,130 +1,86 @@
 ﻿/*
-1.      Создать enum Priority (Low, Medium, High) и Status(New, InProgress, Failed, Done)
+1.      Переделать классы enum Priority (Low, Medium, High) и Status(New, InProgress, Failed, Done)
 
 
-2.      Создать класс Bug  Свойствами: (public int id{ get; set; })
+У вас уже написаны классы TestCase, Step, Bug с базовым функционалом.
 
-a.      Id - заполняется автоматически uid;
+Объявлены и инициализированы коллекции TestCase и Bug в классе Project
 
-b.      CreationDate - заполняется автоматически;
+1.      Создать интерфейс IIssue содержащий в себе методы Get() и Set()      
 
-c.      Priority - заполняется пользователем; (тип Priority)
+2.      Создать абстрактный класс Issue, наследуемый от IIssue, содержащий общие свойства и реализующий общие методы для TestCase и Bug.
 
-d.      Summary - заполняется пользователем;
+3.      Переопределить методы Get() и Set() в классах TestCase и Bug
 
-e.      Precondition - заполняется автоматически из объекта тест-кейс;
+4.      Создать статический класс Actions с методом int Choose(string[]), принимающий в себя массив пунктов меню, выводящий их на экран для предложения вариантов действий из меню. Принимает значение из консоли, конвертирует в тип int. Если ввод не соответствует одному из требуемых значений, выполняется снова
 
-f.       Status;  (тип Status)
+5.      Реализовать статические класс с методами расширения для коллекций: с Generic типом и вынести в них функционал добавления добавления элемента, вовода всех элементов на экран (с сортировкой и фильтрацией), Вывода отдельного элемента по ИД
 
-g.      TestCaseId - заполняется автоматически из объекта тест-кейс;
+6.      *Реализовать статический метод Seed(), автоматически заполняющий коллекции TestCase и Bug. Добавить его, как опцию меню.
 
-h.      StepNumber - заполняется пользователем;
+7. *При выводе всех элементов реализовать возможность задания сортировки и фильтрации элементов по заданным значениям
 
-i.       ActualResult - заполняется пользователем;
+8. *Реализовать все взаимодействия в соответствии с принципами ООП (+SOLID, KISS, YAGNI, DRY)
 
-j.       ExpectedResult - заполняется автоматически из объекта тест-кейс и номера стэпа;
+Сдать к сб (11.12.2021) 17:00 (Минск)
 
-
-
-3.      Создать класс Step со свойствами:
-
-a.      Number - заполняется пользователем;
-
-b.      Action - заполняется пользователем;
-
-c.      ExpectedResult - заполняется пользователем;.
-
-
-
-4.      Создать класс TestCase со свойствами:
-
-a.      Id; (Заполняется автоматически)
-
-b.      CreationDate; (Заполняется автоматически)
-
-c.      Priority; (Low, Medium, High)
-
-d.      Summary - заполняется пользователем;
-
-e.      Precondition - заполняется пользователем;
-
-f.       Status; (New, InProgress, Failed, Done)
-
-g.      Коллекции Step.
-
-
-
-5.      Во всех классах реализовать методы заполнения и вывода на экран (Fill(…), Show())
-
-a.      Каждый ввод с консли должен проверяться на валидность и если не проходит, то предлагать выполнить это действие снова.
-
-6.      Вынести классы и перечисления(enum) в отдельные файлы.(желательно в папку)
-
-
-7.      * В Program.cs создать коллекции Bugs и TestCases
-
-8.      * В Switch меню реализовать добавление и удаление в коллекции Bugs и TestCase
-
-9.      * Создать абстрактный класс, содержащий общие свойства и методы, унаследовать от него Bug и TestCase.
 
 */
-using System.Collections;
 
 namespace Homework2
 {
     public class Program
     {
-        private static Bug bug;
 
-        public static void Main(string[] args) 
+        public static void Main(string[] args)
         {
-            Dictionary<Guid, TestCase> testCaseCollection = new Dictionary<Guid, TestCase>();
-            Dictionary<Guid, Bug> bugCollection = new Dictionary<Guid, Bug>();
+            List<TestCase> testCaseList = new List<TestCase>();
+            List<Bug> bugList = new List<Bug>();
 
-            ArrayList stepList = Step.FillStepsCollection();
-            Step.ShowSteps(stepList);
-
-            TestCase testCase = TestCase.FillTestCase();
-            TestCase.ShowTestCase(testCase);
-
-            int createBug;
+            int userChoice;
             do
             {
-                Console.Write("Do you want to create a Bug on a basis of created Test case?. \nType 1 for Yes, type 2 for No: ");
-                createBug = int.Parse(Console.ReadLine());
-            } while (createBug != 1 && createBug != 2);
+                userChoice = Actions.EnumChooseOptions<ChooseOptions>();
 
-            if (createBug == 1) 
+                switch (userChoice)
+                {
+                    case 1:
+                        ICollectionExtension.AddIssue<TestCase>(testCaseList);
+                        
+                        break;
+                    case 2:
+                        ICollectionExtension.AddIssue<Bug>(bugList);
+                        
+                        break;
+                    case 3:
+                        Console.WriteLine("\n\nInput is over");
+                        break;
+                }
+            } while (userChoice == 1 || userChoice == 2);
+
+
+
+            ICollectionExtension.ShowAll<TestCase>(testCaseList);
+            ICollectionExtension.ShowAll<Bug>(bugList);
+
+            ICollectionExtension.FilterPriority<TestCase>(testCaseList, 3);
+            ICollectionExtension.FilterPriority<Bug>(bugList, 1);
+
+            ICollectionExtension.FilterStatus<TestCase>(testCaseList, 1);
+            ICollectionExtension.FilterStatus<Bug>(bugList, 4);
+
+            ICollectionExtension.SortDate<TestCase>(testCaseList);
+            ICollectionExtension.SortDate<Bug>(bugList);
+
+            if (testCaseList.Count >= 1) 
             {
-                bug = Bug.FillBug(testCase);
-                Bug.ShowBug(bug);
+                ICollectionExtension.FindId<TestCase>(testCaseList, testCaseList[0].Id);
             }
-            
 
-            int successSave;
-            do
-            {
-                Console.Write("Do you want to save previously created items? \nType 1 for Yes, type 2 for No: ");
-                successSave = int.Parse(Console.ReadLine());
-            } while (successSave != 1 && successSave != 2);
 
-            switch (successSave)
+            if (bugList.Count >= 1)
             {
-                case 1:
-                    if (createBug == 1)
-                    {
-                        testCaseCollection.Add(testCase.Id, testCase);
-                        bugCollection.Add(bug.Id, bug);
-                    }
-                    else 
-                    {
-                        testCaseCollection.Add(testCase.Id, testCase);
-                    }
-                    Console.Write("All items successfully saved. Program is over.");
-                    break;
-                case 2:
-                    Console.Write("Program is over.");
-                    break;
+                ICollectionExtension.FindId<Bug>(bugList, bugList[0].Id);
             }
         }
     }
