@@ -1,4 +1,4 @@
-﻿namespace Homework2
+﻿namespace Homework3
 {
     [Serializable]
     public abstract class Issue : IIssue
@@ -37,6 +37,7 @@
 
             CreationDate = DateTimeOffset.Now;
 
+            Status = (Status)0;
 
             int successPriority;
             do
@@ -46,25 +47,8 @@
             } while (successPriority != 1 && successPriority != 2 && successPriority != 3);
             Priority = (Priority)successPriority - 1;
 
-            
-            do
-            {
-                Console.Write("Enter Issue Summary: ");
-                Summary = Console.ReadLine();
-            } while (string.IsNullOrEmpty(Summary) || string.IsNullOrWhiteSpace(Summary));
-
-
-            Console.Write("Enter Issue Precondition if there is any: ");
-            Precondition = Console.ReadLine();
-
-
-            int successStatus;
-            do
-            {
-                Console.Write("Enter Issue Status. Type 1 for New, Type 2 for InProgress, Type 3 for Failed or Type 4 for Done: ");
-                successStatus = int.Parse(Console.ReadLine());
-            } while (successStatus != 1 && successStatus != 2 && successStatus != 3 && successStatus != 4);
-            Status = (Status)successStatus - 1;
+                      
+                        
         }       
         
     }

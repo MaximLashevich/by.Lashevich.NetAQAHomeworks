@@ -1,5 +1,6 @@
 ﻿namespace Homework2
 {
+    [Serializable]
     public class Bug : Issue
     {
         public string TestCaseId { get; set; }
@@ -18,10 +19,10 @@
             Status status, string testCaseId, int stepNumber, string actualResult, string expectedResult)
             : base(id, creationDate, priority, summary, precondition, status)
         {
-            this.TestCaseId = testCaseId;
-            this.StepNumber = stepNumber;
-            this.ActualResult = actualResult;
-            this.ExpectedResult = expectedResult;
+            TestCaseId = testCaseId;
+            StepNumber = stepNumber;
+            ActualResult = actualResult;
+            ExpectedResult = expectedResult;
         }
 
         public override string Get()
