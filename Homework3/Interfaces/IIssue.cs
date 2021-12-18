@@ -1,4 +1,4 @@
-﻿namespace Homework2
+﻿namespace Homework3
 {
     public interface IIssue
     {
@@ -7,6 +7,10 @@
         public DateTimeOffset CreationDate { get; }
 
         Priority Priority { get; set; }
+
+        string Summary { get; set; }
+
+        string? Precondition { get; set; }
 
         Status Status { get; set; }
 

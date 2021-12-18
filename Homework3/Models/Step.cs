@@ -1,4 +1,4 @@
-﻿namespace Homework2
+﻿namespace Homework3
 {
     [Serializable]
     public class Step

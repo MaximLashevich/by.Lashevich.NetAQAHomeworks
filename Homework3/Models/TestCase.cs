@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
 
-namespace Homework2
+namespace Homework3
 {
     [Serializable]
     public class TestCase : Issue
@@ -30,6 +30,15 @@ namespace Homework2
         public override void Set()
         {
             base.Set();
+
+            Console.Write("Enter Issue Precondition if there is any: ");
+            Precondition = Console.ReadLine();
+
+            do
+            {
+                Console.Write("Enter Issue Summary: ");
+                Summary = Console.ReadLine();
+            } while (string.IsNullOrEmpty(Summary) || string.IsNullOrWhiteSpace(Summary));
 
             int i = 0;
             int moveOn;
